@@ -141,8 +141,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="email" destination="8Hr-3W-NJT" id="4Iq-Xc-9oj"/>
                         <outlet property="facebookBtn" destination="LXH-LZ-gfX" id="szL-fU-gnU"/>
                         <outlet property="loginBtn" destination="0vN-5L-YbB" id="2K3-lo-ih7"/>
+                        <outlet property="pass" destination="y7y-PL-dhV" id="882-uV-zFh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

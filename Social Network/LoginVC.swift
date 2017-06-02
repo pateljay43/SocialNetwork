@@ -12,6 +12,8 @@ import FacebookLogin
 import Firebase
 
 class LoginVC: UIViewController {
+    @IBOutlet weak var email: LoginTextField!
+    @IBOutlet weak var pass: LoginTextField!
     @IBOutlet weak var facebookBtn: LoginButton!
     @IBOutlet weak var loginBtn: LoginButton!
     
@@ -48,6 +50,21 @@ class LoginVC: UIViewController {
     }
     
     func loginBtnTapped(_ sender: UIButton) {
+        if let email = self.email.text , let pass = self.pass.text {
+            Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
+                if error == nil {
+                    print("Email authenticated with firebase")
+                } else {
+                    Auth.auth().createUser(withEmail: email, password: pass, completion: { (user, error) in
+                        if error == nil {
+                            print("New email authenticated with firebase")
+                        } else {
+                            print("Unable to authenticate email with firebase")
+                        }
+                    })
+                }
+            })
+        }
     }
 }
 
