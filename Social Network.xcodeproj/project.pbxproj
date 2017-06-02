@@ -13,6 +13,10 @@
 		6931374F1EE0053D00353570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6931374E1EE0053D00353570 /* Assets.xcassets */; };
 		693137521EE0053D00353570 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693137501EE0053D00353570 /* LaunchScreen.storyboard */; };
 		6931375A1EE0059200353570 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 693137591EE0059200353570 /* GoogleService-Info.plist */; };
+		695284301EE0F26D008E7374 /* LoginUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952842F1EE0F26D008E7374 /* LoginUIView.swift */; };
+		69CB86481EE0F338002E7546 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB86471EE0F338002E7546 /* Constants.swift */; };
+		69CB864A1EE0F80D002E7546 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB86491EE0F80D002E7546 /* LoginButton.swift */; };
+		69CB864E1EE0FDB3002E7546 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB864D1EE0FDB3002E7546 /* LoginTextField.swift */; };
 		D874DC27B51A76D17C6BE447 /* Pods_Social_Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65875C24364EEC1C0419EDB9 /* Pods_Social_Network.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +31,10 @@
 		693137511EE0053D00353570 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		693137531EE0053D00353570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		693137591EE0059200353570 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6952842F1EE0F26D008E7374 /* LoginUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUIView.swift; sourceTree = "<group>"; };
+		69CB86471EE0F338002E7546 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		69CB86491EE0F80D002E7546 /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		69CB864D1EE0FDB3002E7546 /* LoginTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		FCB64E231F12ACBE61E0E12D /* Pods-Social Network.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Network.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social Network/Pods-Social Network.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +71,7 @@
 		693137461EE0053D00353570 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
+				69CB86461EE0F32C002E7546 /* Util */,
 				6931375E1EE005B600353570 /* Model */,
 				6931375C1EE0059B00353570 /* View */,
 				6931375B1EE0059500353570 /* Controller */,
@@ -87,6 +96,9 @@
 		6931375C1EE0059B00353570 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6952842F1EE0F26D008E7374 /* LoginUIView.swift */,
+				69CB86491EE0F80D002E7546 /* LoginButton.swift */,
+				69CB864D1EE0FDB3002E7546 /* LoginTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -96,6 +108,14 @@
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		69CB86461EE0F32C002E7546 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				69CB86471EE0F338002E7546 /* Constants.swift */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 		84E3CD37EC834E731787542C /* Frameworks */ = {
@@ -241,7 +261,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6931374A1EE0053D00353570 /* LoginVC.swift in Sources */,
+				69CB864A1EE0F80D002E7546 /* LoginButton.swift in Sources */,
+				695284301EE0F26D008E7374 /* LoginUIView.swift in Sources */,
+				69CB864E1EE0FDB3002E7546 /* LoginTextField.swift in Sources */,
 				693137481EE0053D00353570 /* AppDelegate.swift in Sources */,
+				69CB86481EE0F338002E7546 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
