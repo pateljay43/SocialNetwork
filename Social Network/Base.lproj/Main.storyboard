@@ -140,6 +140,10 @@
                             <constraint firstItem="40Q-cB-QjI" firstAttribute="top" secondItem="LXH-LZ-gfX" secondAttribute="bottom" constant="20" id="voH-ZD-e6W"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="facebookBtn" destination="LXH-LZ-gfX" id="szL-fU-gnU"/>
+                        <outlet property="loginBtn" destination="0vN-5L-YbB" id="2K3-lo-ih7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
