@@ -10,6 +10,7 @@ import UIKit
 import FacebookCore
 import FacebookLogin
 import Firebase
+import SwiftKeychainWrapper
 
 class LoginVC: UIViewController {
     @IBOutlet weak var email: LoginTextField!
@@ -22,6 +23,17 @@ class LoginVC: UIViewController {
         facebookBtn.addTarget(self, action: #selector(facebookBtnTapped(_:)), for: .touchUpInside)
         loginBtn.addTarget(self, action: #selector(loginBtnTapped(_:)), for: .touchUpInside)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            self.view.isHidden = true
+            print("Found uid in the keychain")
+            performSegue(withIdentifier: "FeedVC", sender: nil)
+        } else {
+            self.view.isHidden = false
+        }
+    }
 
     func firebaseAuth(_ credential: AuthCredential) {
         Auth.auth().signIn(with: credential) { (user, error) in
@@ -29,6 +41,7 @@ class LoginVC: UIViewController {
                 print("Unable to authenticate with firebase: \(error)")
             } else {
                 print("Successfully authenticated with firebase")
+                self.setKeyChainForUser(user)
             }
         }
     }
@@ -54,16 +67,26 @@ class LoginVC: UIViewController {
             Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                 if error == nil {
                     print("Email authenticated with firebase")
+                    self.setKeyChainForUser(user)
                 } else {
                     Auth.auth().createUser(withEmail: email, password: pass, completion: { (user, error) in
                         if error == nil {
                             print("New email authenticated with firebase")
+                            self.setKeyChainForUser(user)
                         } else {
                             print("Unable to authenticate email with firebase")
                         }
                     })
                 }
             })
+        }
+    }
+    
+    func setKeyChainForUser(_ user: User?) {
+        if let user = user {
+            let isSaved = KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
+            print("Saved UID to keychain? \(isSaved)")
+            performSegue(withIdentifier: "FeedVC", sender: nil)
         }
     }
 }

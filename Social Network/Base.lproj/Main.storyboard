@@ -145,11 +145,43 @@
                         <outlet property="facebookBtn" destination="LXH-LZ-gfX" id="szL-fU-gnU"/>
                         <outlet property="loginBtn" destination="0vN-5L-YbB" id="2K3-lo-ih7"/>
                         <outlet property="pass" destination="y7y-PL-dhV" id="882-uV-zFh"/>
+                        <segue destination="2YG-R8-dNo" kind="show" identifier="FeedVC" id="s77-Yc-MPE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
+        </scene>
+        <!--FeedVC-->
+        <scene sceneID="C0i-HT-IOl">
+            <objects>
+                <viewController id="2YG-R8-dNo" customClass="FeedVC" customModule="Social_Network" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wYh-B0-G3Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="iFU-In-mP5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ujd-7J-Boa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyg-nj-Mxx">
+                                <rect key="frame" x="163" y="318" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutTapped:" destination="2YG-R8-dNo" eventType="touchUpInside" id="h8C-Em-5Cc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5v-AS-uTn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924" y="124"/>
         </scene>
     </scenes>
     <resources>
