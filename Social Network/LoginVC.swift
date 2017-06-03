@@ -48,17 +48,23 @@ class LoginVC: UIViewController {
     
     func facebookBtnTapped(_ sender: UIButton) {
         let loginManager = LoginManager()
-        loginManager.logIn([.publicProfile], viewController: self) { (loginResult) in
-            switch loginResult {
-            case .failed(let error):
-                print(error)
-            case .cancelled:
-                print("User cancelled login")
-            case .success( _, _, let token):
-                print("Successfully authenticated with facebook")
-                let credential = FacebookAuthProvider.credential(withAccessToken: token.authenticationToken)
-                self.firebaseAuth(credential)
+        if AccessToken.current == nil {
+            loginManager.logIn([.publicProfile], viewController: self) { (loginResult) in
+                switch loginResult {
+                case .failed(let error):
+                    print(error)
+                case .cancelled:
+                    print("User cancelled login")
+                case .success( _, _, let token):
+                    print("Successfully authenticated with facebook")
+                    let credential = FacebookAuthProvider.credential(withAccessToken: token.authenticationToken)
+                    self.firebaseAuth(credential)
+                }
             }
+        } else {
+            print("Previously authenticated with facebook")
+            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.authenticationToken)
+            self.firebaseAuth(credential)
         }
     }
     

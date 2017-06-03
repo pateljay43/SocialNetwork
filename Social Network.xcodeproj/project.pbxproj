@@ -14,6 +14,9 @@
 		693137521EE0053D00353570 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693137501EE0053D00353570 /* LaunchScreen.storyboard */; };
 		6931375A1EE0059200353570 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 693137591EE0059200353570 /* GoogleService-Info.plist */; };
 		694541661EE14A7000B264C1 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694541651EE14A7000B264C1 /* FeedVC.swift */; };
+		694541681EE2303200B264C1 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694541671EE2303200B264C1 /* CircleImageView.swift */; };
+		6945416A1EE230E500B264C1 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694541691EE230E500B264C1 /* RoundButton.swift */; };
+		6945416C1EE2412D00B264C1 /* NewPostBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945416B1EE2412D00B264C1 /* NewPostBarView.swift */; };
 		695284301EE0F26D008E7374 /* LoginUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952842F1EE0F26D008E7374 /* LoginUIView.swift */; };
 		69CB86481EE0F338002E7546 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB86471EE0F338002E7546 /* Constants.swift */; };
 		69CB864A1EE0F80D002E7546 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB86491EE0F80D002E7546 /* LoginButton.swift */; };
@@ -33,6 +36,9 @@
 		693137531EE0053D00353570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		693137591EE0059200353570 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		694541651EE14A7000B264C1 /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		694541671EE2303200B264C1 /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
+		694541691EE230E500B264C1 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		6945416B1EE2412D00B264C1 /* NewPostBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostBarView.swift; sourceTree = "<group>"; };
 		6952842F1EE0F26D008E7374 /* LoginUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUIView.swift; sourceTree = "<group>"; };
 		69CB86471EE0F338002E7546 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69CB86491EE0F80D002E7546 /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
@@ -102,6 +108,9 @@
 				6952842F1EE0F26D008E7374 /* LoginUIView.swift */,
 				69CB86491EE0F80D002E7546 /* LoginButton.swift */,
 				69CB864D1EE0FDB3002E7546 /* LoginTextField.swift */,
+				694541671EE2303200B264C1 /* CircleImageView.swift */,
+				694541691EE230E500B264C1 /* RoundButton.swift */,
+				6945416B1EE2412D00B264C1 /* NewPostBarView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -263,7 +272,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6945416A1EE230E500B264C1 /* RoundButton.swift in Sources */,
+				694541681EE2303200B264C1 /* CircleImageView.swift in Sources */,
 				6931374A1EE0053D00353570 /* LoginVC.swift in Sources */,
+				6945416C1EE2412D00B264C1 /* NewPostBarView.swift in Sources */,
 				694541661EE14A7000B264C1 /* FeedVC.swift in Sources */,
 				69CB864A1EE0F80D002E7546 /* LoginButton.swift in Sources */,
 				695284301EE0F26D008E7374 /* LoginUIView.swift in Sources */,

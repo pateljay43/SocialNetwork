@@ -11,13 +11,15 @@ import Firebase
 import SwiftKeychainWrapper
 
 class FeedVC: UIViewController {
+    @IBOutlet weak var logoutBtn: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        logoutBtn.isUserInteractionEnabled = true
+        logoutBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logoutTapped(_:))))
     }
 
-    @IBAction func logoutTapped(_ sender: UIButton) {
+    func logoutTapped(_ recognizer: UIGestureRecognizer) {
         do {
             try Auth.auth().signOut()
         } catch let error {
