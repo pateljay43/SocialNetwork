@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NotificationCenter
 import FacebookCore
 import FacebookLogin
 import Firebase
@@ -26,10 +27,17 @@ class LoginVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            self.view.isHidden = true
-            print("Found uid in the keychain")
-            performSegue(withIdentifier: "FeedVC", sender: nil)
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) , AccessToken.current != nil {
+            AccessToken.refreshCurrentToken { (_, error) in
+                if let error = error {
+                    print("Access token refresh failed: \(error)")
+                    AccessToken.current = nil
+                } else {
+                    self.view.isHidden = true
+                    print("Found uid in the keychain")
+                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                }
+            }
         } else {
             self.view.isHidden = false
         }
@@ -41,30 +49,28 @@ class LoginVC: UIViewController {
                 print("Unable to authenticate with firebase: \(error)")
             } else {
                 print("Successfully authenticated with firebase")
-                self.setKeyChainForUser(user)
+                self.setKeyChainForUserId(user!.uid, andProvider: credential.provider)
             }
         }
     }
     
     func facebookBtnTapped(_ sender: UIButton) {
         let loginManager = LoginManager()
-        if AccessToken.current == nil {
-            loginManager.logIn([.publicProfile], viewController: self) { (loginResult) in
-                switch loginResult {
-                case .failed(let error):
-                    print(error)
-                case .cancelled:
-                    print("User cancelled login")
-                case .success( _, _, let token):
+        loginManager.logIn(FB_PERMISSIONS, viewController: self) { (loginResult) in
+            switch loginResult {
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("User cancelled login")
+            case .success(let grantedPermissions, _, let token):
+                if grantedPermissions.count == FB_PERMISSIONS.count {
                     print("Successfully authenticated with facebook")
                     let credential = FacebookAuthProvider.credential(withAccessToken: token.authenticationToken)
                     self.firebaseAuth(credential)
+                } else {
+                    print("Some of the requested permissions were rejected by user")
                 }
             }
-        } else {
-            print("Previously authenticated with facebook")
-            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.authenticationToken)
-            self.firebaseAuth(credential)
         }
     }
     
@@ -73,12 +79,12 @@ class LoginVC: UIViewController {
             Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                 if error == nil {
                     print("Email authenticated with firebase")
-                    self.setKeyChainForUser(user)
+                    self.setKeyChainForUserId(user!.uid, andProvider: user!.providerID)
                 } else {
                     Auth.auth().createUser(withEmail: email, password: pass, completion: { (user, error) in
                         if error == nil {
                             print("New email authenticated with firebase")
-                            self.setKeyChainForUser(user)
+                            self.setKeyChainForUserId(user!.uid, andProvider: user!.providerID)
                         } else {
                             print("Unable to authenticate email with firebase")
                         }
@@ -88,12 +94,11 @@ class LoginVC: UIViewController {
         }
     }
     
-    func setKeyChainForUser(_ user: User?) {
-        if let user = user {
-            let isSaved = KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
-            print("Saved UID to keychain? \(isSaved)")
-            performSegue(withIdentifier: "FeedVC", sender: nil)
-        }
+    func setKeyChainForUserId(_ uid: String, andProvider provider: String) {
+        DataService.shared.createUser(uid, withData: ["provider":provider])
+        let isSaved = KeychainWrapper.standard.set(uid, forKey: KEY_UID)
+        print("Saved UID to keychain? \(isSaved)")
+        performSegue(withIdentifier: "FeedVC", sender: nil)
     }
 }
 
