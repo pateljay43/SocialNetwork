@@ -20,6 +20,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         logoutBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logoutTapped(_:))))
         tableView.delegate = self
         tableView.dataSource = self
+        
+        DataService.shared.REF_POSTS.observe(DataEventType.value, with: { (snapshot) in
+            print(snapshot.value ?? "")
+        })
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
