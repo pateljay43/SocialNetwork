@@ -48,8 +48,12 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Post caption: \(posts[indexPath.row].caption)")
-        return tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostCell
+        if cell == nil {
+            cell = PostCell(style: .default, reuseIdentifier: "postCell")
+        }
+        cell!.configCell(posts[indexPath.row])
+        return cell!
     }
 
     func logoutTapped(_ recognizer: UIGestureRecognizer) {

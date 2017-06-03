@@ -326,11 +326,11 @@
                                                                     <rect key="frame" x="0.0" y="330" width="327" height="12.5"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTg-R2-gdT" userLabel="Lpad">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="237.5" height="12.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="239.5" height="12.5"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rk0-Cf-ZlH">
-                                                                            <rect key="frame" x="242.5" y="0.0" width="29.5" height="12.5"/>
+                                                                            <rect key="frame" x="244.5" y="0.0" width="29.5" height="12.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="13" id="89u-0k-hQF"/>
                                                                                 <constraint firstAttribute="width" constant="30" id="BV9-G2-dEi"/>
@@ -340,10 +340,10 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvA-8f-NiD">
-                                                                            <rect key="frame" x="277" y="0.0" width="40" height="12.5"/>
+                                                                            <rect key="frame" x="279" y="0.0" width="38" height="12.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="13" id="Ahx-7A-X8F"/>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="TiO-fU-XaI"/>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="5" id="TiO-fU-XaI"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
