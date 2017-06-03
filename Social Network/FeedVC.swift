@@ -13,17 +13,29 @@ import SwiftKeychainWrapper
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var logoutBtn: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-
+    
+    var posts: [Post]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        posts = []
         logoutBtn.isUserInteractionEnabled = true
         logoutBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logoutTapped(_:))))
         tableView.delegate = self
         tableView.dataSource = self
-        
-        DataService.shared.REF_POSTS.observe(DataEventType.value, with: { (snapshot) in
-            print(snapshot.value ?? "")
-        })
+        DataService.shared.REF_POSTS.observe(DataEventType.value, with: postsUpdateHandler(_:))
+    }
+    
+    func postsUpdateHandler(_ snapshot: DataSnapshot) -> Void {
+        if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+            for snap in snapshot {
+                if let dict = snap.value as? Dictionary<String, Any> {
+                    let postKey = snap.key
+                    self.posts.append(Post(postKey: postKey, postData: dict))
+                }
+            }
+        }
+        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,11 +43,12 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        print(posts.count)
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print("Post caption: \(posts[indexPath.row].caption)")
         return tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
     }
 
