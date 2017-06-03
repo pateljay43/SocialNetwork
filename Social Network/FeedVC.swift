@@ -10,19 +10,27 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var logoutBtn: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     var posts: [Post]!
+    var imagePicker: UIImagePickerController!
+    @IBOutlet weak var addImg: CircleImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         posts = []
         logoutBtn.isUserInteractionEnabled = true
         logoutBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logoutTapped(_:))))
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
         DataService.shared.REF_POSTS.observe(DataEventType.value, with: postsUpdateHandler(_:))
     }
     
@@ -43,7 +51,6 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(posts.count)
         return posts.count
     }
     
@@ -55,7 +62,20 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell!.configCell(posts[indexPath.row])
         return cell!
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            addImg.image = image
+        } else {
+            print("Selected an invalid image")
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
 
+    @IBAction func addImageTapped(_ sender: UITapGestureRecognizer) {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     func logoutTapped(_ recognizer: UIGestureRecognizer) {
         do {
             try Auth.auth().signOut()
