@@ -21,6 +21,7 @@ let SEGUE_FEEDVC = "FeedVC"
 
 // FeedVC
 let POST_CELL = "postCell"
+let COMPRESSION: CGFloat = 0.5
 
 //Database child paths
 let POSTS = "posts"

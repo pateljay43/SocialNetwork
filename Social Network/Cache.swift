@@ -11,7 +11,7 @@ import UIKit
 class Cache {
     static let shared = Cache()
     
-    // [postId : postImage]
+    // [imgUrl : postImage]
     fileprivate var _imageCache: Dictionary<String, UIImage>
     
     init() {

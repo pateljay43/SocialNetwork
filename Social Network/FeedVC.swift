@@ -43,14 +43,15 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     func postsUpdateHandler(_ snapshot: DataSnapshot) -> Void {
         if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+            posts = []
             for snap in snapshot {
                 if let dict = snap.value as? Dictionary<String, Any> {
                     let postKey = snap.key
-                    self.posts.append(Post(postKey: postKey, postData: dict))
+                    posts.append(Post(postKey: postKey, postData: dict))
                 }
             }
         }
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -75,7 +76,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             addImg.backgroundColor = UIColor.white
             addImg.image = image
         } else {
-            resetAddImgBtn()
+            resetPostView()
             print("Selected an invalid image")
         }
         picker.dismiss(animated: true, completion: nil)
@@ -95,21 +96,39 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             return
         }
         
-        if let imageData = UIImageJPEGRepresentation(image, 0.3) {
+        if let imageData = UIImageJPEGRepresentation(image, COMPRESSION) {
             let metaData = StorageMetadata()
             metaData.contentType = "image/jpeg"
-            DataService.shared.REF_POST_IMAGES.child("\(UUID().uuidString).jpg").putData(imageData, metadata: metaData) { (metadata, error) in
+            DataService.shared.REF_POST_IMAGES.child("\(UUID().uuidString).jpg").putData(imageData, metadata: metaData) { (metaData, error) in
                 if error != nil {
                     print("Unable to upload the image to storage")
                 } else {
-                    print("Uploaded image successfully")
-                    if let downloadURL = metaData.downloadURL() {
-                        let url = downloadURL.absoluteString
+                    if let metaData = metaData {
+                        if let downloadURL = metaData.downloadURL() {
+                            self.postToFirebase(imgUrl: downloadURL.absoluteString)
+                            print("Uploaded image successfully")
+                        }
+                        self.resetPostView()
                     }
-                    self.resetAddImgBtn()
                 }
             }
         }
+    }
+    
+    func postToFirebase(imgUrl: String) {
+        let post: Dictionary<String, Any> = [
+            CAPTION : captionField.text ?? "",
+            IMAGE_URL : imgUrl,
+            LIKES : 0
+        ]
+        let postIdRef = DataService.shared.REF_POSTS.childByAutoId()
+        postIdRef.setValue(post)
+    }
+    
+    func resetPostView() {
+        captionField.text = ""
+        addImg.backgroundColor = ADD_IMG_BG
+        addImg.image = ADD_IMG
     }
     
     func logoutTapped(_ recognizer: UIGestureRecognizer) {
@@ -123,10 +142,5 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                 self.dismiss(animated: false, completion: nil)
             }
         }
-    }
-    
-    func resetAddImgBtn() {
-        addImg.backgroundColor = ADD_IMG_BG
-        addImg.image = ADD_IMG
     }
 }
