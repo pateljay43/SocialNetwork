@@ -304,8 +304,12 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-fV-Pq5">
                                                                             <rect key="frame" x="0.0" y="65" width="327" height="260"/>
                                                                             <subviews>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="7vU-fG-eib">
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7vU-fG-eib">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="327" height="205"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="327" id="1lp-dd-dDa"/>
+                                                                                        <constraint firstAttribute="height" constant="205" id="QFu-MZ-hor"/>
+                                                                                    </constraints>
                                                                                 </imageView>
                                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zne-Rm-0lX">
                                                                                     <rect key="frame" x="8" y="210" width="311" height="50"/>
@@ -441,8 +445,7 @@
         <image name="add-post" width="88" height="88"/>
         <image name="empty-heart" width="70" height="70"/>
         <image name="f" width="352" height="328"/>
-        <image name="placeholder" width="567" height="312"/>
-        <image name="profile" width="113" height="155"/>
+        <image name="profile" width="113" height="159"/>
         <image name="sign-out" width="92" height="65"/>
     </resources>
 </document>
