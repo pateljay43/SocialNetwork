@@ -14,10 +14,10 @@ class Post {
     fileprivate var _likes: Int!
     fileprivate var _postKey: String!
     
-    var caption: String { return _caption }
-    var imgUrl: String { return _imgUrl }
-    var likes: Int { return _likes }
-    var postKey: String { return _postKey }
+    var caption: String { return _caption ?? "" }
+    var imgUrl: String { return _imgUrl ?? "" }
+    var likes: Int { return _likes ?? 0 }
+    var postKey: String { return _postKey ?? "" }
     
     init(caption: String, imgUrl: String, likes: Int) {
         _caption = caption
@@ -28,13 +28,13 @@ class Post {
     init(postKey: String, postData: Dictionary<String, Any>) {
         _postKey = postKey
         
-        if let caption = postData["caption"] as? String {
+        if let caption = postData[CAPTION] as? String {
             _caption = caption
         }
-        if let imgUrl = postData["imgUrl"] as? String {
+        if let imgUrl = postData[IMAGE_URL] as? String {
             _imgUrl = imgUrl
         }
-        if let likes = postData["likes"] as? Int {
+        if let likes = postData[LIKES] as? Int {
             _likes = likes
         }
     }

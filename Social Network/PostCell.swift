@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PostCell: UITableViewCell {
     @IBOutlet weak var profilePic: UIImageView!
@@ -20,10 +21,24 @@ class PostCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-
+    
     func configCell(_ post: Post) {
+        if let img = Cache.shared.getImageForKey(post.postKey) {    // load from cache
+            postImg.image = img
+        } else {    // Download image
+            let ref = Storage.storage().reference(forURL: post.imgUrl)
+            ref.getData(maxSize: 2 * 1024 * 1024) { (data, error) in
+                if let error = error {
+                    print("Unable to download post image from firebase storage: \(error)")
+                } else {
+                    if let data = data , let img = UIImage(data: data) {
+                        self.postImg.image = img
+                        Cache.shared.setImageForKey(post.postKey, andImage: img)
+                    }
+                }
+            }
+        }
         caption.text = post.caption
         likesLbl.text = "\(post.likes)"
     }
-    
 }

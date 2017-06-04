@@ -14,6 +14,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     @IBOutlet weak var logoutBtn: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    
     var posts: [Post]!
     var imagePicker: UIImagePickerController!
     @IBOutlet weak var addImg: CircleImageView!
@@ -55,9 +57,9 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: POST_CELL, for: indexPath) as? PostCell
         if cell == nil {
-            cell = PostCell(style: .default, reuseIdentifier: "postCell")
+            cell = PostCell(style: .default, reuseIdentifier: POST_CELL)
         }
         cell!.configCell(posts[indexPath.row])
         return cell!

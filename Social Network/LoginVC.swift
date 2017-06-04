@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
                 } else {
                     self.view.isHidden = true
                     print("Found uid in the keychain")
-                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                    self.performSegue(withIdentifier: SEGUE_FEEDVC, sender: nil)
                 }
             }
         } else {
@@ -95,10 +95,10 @@ class LoginVC: UIViewController {
     }
     
     func setKeyChainForUserId(_ uid: String, andProvider provider: String) {
-        DataService.shared.createUser(uid, withData: ["provider":provider])
+        DataService.shared.createUser(uid, withData: [PROVIDER:provider])
         let isSaved = KeychainWrapper.standard.set(uid, forKey: KEY_UID)
         print("Saved UID to keychain? \(isSaved)")
-        performSegue(withIdentifier: "FeedVC", sender: nil)
+        performSegue(withIdentifier: SEGUE_FEEDVC, sender: nil)
     }
 }
 
