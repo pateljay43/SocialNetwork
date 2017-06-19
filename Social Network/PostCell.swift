@@ -30,6 +30,7 @@ class PostCell: UITableViewCell {
     
     func configCell(_ post: Post) {
         self.post = post
+        postImg.image = nil
         likesRef = DataService.shared.REF_CURRENT_USER.child(LIKES).child(post.postKey)
         if let img = Cache.shared.getImageForKey(post.imgUrl) {    // load from cache
             postImg.image = img
